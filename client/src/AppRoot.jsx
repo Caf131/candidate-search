@@ -7,7 +7,6 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.children = React.Children.toArray(props.children);
-    console.log('children => ', this.children);
   }
 
   render() {
