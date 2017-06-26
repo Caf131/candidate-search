@@ -1,13 +1,14 @@
 {
   "name": "respondent-test-forehand",
   "version": "1.0.0",
-  "description": "",
+  "repository": "https://github.com/Caf131/candidate-search.git",
+  "description": "Candidate Search Front/Backend",
   "scripts": {
-    "start": "npm run build && node server/server-app.js",
+    "start": "node server/server-app.js",
     "test": "jest --coverage",
     "lint": "./node_modules/.bin/eslint src/**/*.jsx",
-    "build": "webpack ./client/src/index.js",
-    "dev": "npm run copy-index && webpack-dev-server --hot",
+    "build": "webpack ./client/src/index.js && npm run copy-index",
+    "dev": "webpack-dev-server --hot --inline && node server/server-app.js",
     "copy-index": "cp index.html ./dist/index.html"
   },
   "author": "chris forehand",

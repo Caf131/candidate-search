@@ -14,7 +14,8 @@ app.get('/', function (req, res) {
 });
 
 var connectionString = Client.getConnectionUrl(argv.user, argv.pass);
-console.log('connectionString => ', connectionString); 
+console.log('argv => ', argv);
+console.log('connectionString => ', connectionString);
 
 Client.openConnection(connectionString)
   .then(function (db) {
