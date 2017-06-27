@@ -3,7 +3,7 @@ var path = require("path");
 var helmet = require("helmet");
 var argv = require('optimist').argv;
 var Client = require("./mongoClient");
-var Services = require('./services/mongo-services');
+var Services = require('./services/profileService');
 var app = express();
 
 // app.use(helmet);
@@ -23,10 +23,10 @@ Client.openConnection(connectionString)
     var services = Services(db);
 
     app.get('/profiles', function (req, res) {
-      services.getAllProfiles(1)
+      services.getAllProfiles(200)
         .then(function (docs) {
-          res.send(docs);
-        })
+          res.json(docs);
+        });
     });
 
     app.listen(3000, function () {

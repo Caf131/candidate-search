@@ -5,15 +5,16 @@ import Layout from './components/Layout';
 import Navigation from './components/Navigation';
 import ProfileCard from './components/ProfileCard';
 import ProfileContainer from './components/ProfileCardContainer';
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
+import SearchBox from './components/SearchBox';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const Application = () => {
   return (
     <App>
       <Navigation />
-      <Layout xs={12} md={12}>
-        <ProfileContainer />
-      </Layout>
+      <ProfileContainer />
     </App>
   );
 }

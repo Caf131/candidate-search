@@ -6,3 +6,11 @@ div {
     }
   }
 }
+
+li {
+  &.list-group-item {
+    div {
+      width: auto;
+    }
+  }
+}

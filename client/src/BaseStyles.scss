@@ -17,3 +17,8 @@
 span.label {
   width: 20px;
 }
+
+.text-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
