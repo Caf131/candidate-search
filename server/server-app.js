@@ -34,5 +34,5 @@ Client.openConnection(connectionString)
     });
   })
   .catch(function (ex) {
-    console.log('connection failed :(');
+    console.log('connection failed :(', ex);
   });

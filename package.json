@@ -7,9 +7,8 @@
     "start": "node server/server-app.js",
     "test": "jest --coverage",
     "lint": "./node_modules/.bin/eslint src/**/*.jsx",
-    "build": "webpack ./client/src/index.js && npm run copy-index",
-    "dev": "webpack-dev-server --hot",
-    "copy-index": "cp index.html ./dist/index.html"
+    "build": "webpack ./client/src/index.js && ncp index.html ./dist/index.html",
+    "dev": "webpack-dev-server --hot"
   },
   "author": "chris forehand",
   "license": "ISC",
@@ -28,6 +27,7 @@
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
     "json-loader": "^0.5.4",
+    "ncp": "^2.0.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
