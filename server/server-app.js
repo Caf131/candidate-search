@@ -29,8 +29,8 @@ Client.openConnection(connectionString)
         });
     });
 
-    app.listen(3000, function () {
-      console.log("listening");
+    var listener = app.listen(3000, function () {
+      console.log(`listening on port: ${listener.address().port}`);
     });
   })
   .catch(function (ex) {
