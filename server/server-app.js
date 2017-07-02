@@ -14,8 +14,6 @@ app.get('/', function (req, res) {
 });
 
 var connectionString = Client.getConnectionUrl(argv.user, argv.pass);
-console.log('argv => ', argv);
-console.log('connectionString => ', connectionString);
 
 Client.openConnection(connectionString)
   .then(function (db) {
@@ -31,6 +29,26 @@ Client.openConnection(connectionString)
 
     app.get('/industries', function (req, res) {
       services.getIndustries()
+        .then(function (docs) {
+          res.json(docs);
+        })
+        .catch(function (ex){
+          res.json('sawwwry ', ex);
+        });
+    });
+
+    app.get('/locations', function (req, res) {
+      services.getLocations()
+        .then(function (docs) {
+          res.json(docs);
+        })
+        .catch(function (ex){
+          res.json('sawwwry ', ex);
+        });
+    });
+
+    app.get('/seniorityLevels', function (req, res) {
+      services.getSeniorityLevels()
         .then(function (docs) {
           res.json(docs);
         })

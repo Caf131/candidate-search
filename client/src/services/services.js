@@ -12,9 +12,30 @@ const getIndustries = () => {
 }
 
 const getLocations = () => {
-  
+  return fetch('/locations')
+    .then((response) => {
+      if(response.status >= 400) {
+        Promise.reject();
+      }
+      return response.json();
+    })
+    .then((data) => Promise.resolve(data))
 }
 
+const getSeniorityLevels = () => {
+  return fetch('/seniorityLevels')
+    .then((response) => {
+      if(response.status >= 400) {
+        Promise.reject();
+      }
+      return response.json();
+    })
+    .then((data) => Promise.resolve(data))
+}
+
+
 export {
-  getIndustries
+  getIndustries,
+  getLocations,
+  getSeniorityLevels
 }

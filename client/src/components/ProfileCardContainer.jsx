@@ -7,7 +7,7 @@ import RowBuilder from './RowBuilder';
 import SearchBox from './SearchBox';
 import DropdownFilter from './DropdownFilter';
 import Error from './Error';
-import { getIndustries } from '../services/services';
+import { getIndustries, getLocations, getSeniorityLevels } from '../services/services';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -138,6 +138,8 @@ export default class ProfileCardContainer extends Component {
                   onFormSubmit={this.onFormSubmit}
                 />
                 <DropdownFilter id={"industry_filter"} provider={getIndustries} title={"Industry"} />
+                <DropdownFilter id={"location_filter"} provider={getLocations} title={"Locations"} />
+                <DropdownFilter id={"seniority_filter"} provider={getSeniorityLevels} title={"Seniority Level"} />
               </Panel>
             </div>
             <div className="col-md-8">

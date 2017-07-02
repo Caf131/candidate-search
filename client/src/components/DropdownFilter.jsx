@@ -42,9 +42,7 @@ export default class DropdownFilter extends Component {
   }
 
   onOptionSelect (index, e) {
-    console.log('selected => ', index);
     this.setState({ selected: index });
-    console.log('e => ', e);
   }
 
   removeSelected() {
@@ -72,7 +70,7 @@ export default class DropdownFilter extends Component {
             hasSelected &&
             <Label className="selected-item">
               {options[selected]}
-              <Label className="remove-selected" onClick={this.removeSelected}>X</Label>
+              <Label title="Remove Filter" className="remove-selected" onClick={this.removeSelected}>X</Label>
             </Label>
           }
         </section>
