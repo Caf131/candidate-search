@@ -11,7 +11,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Grid>
+      <Grid fluid>
         { React.Children.map(this.children, (child) => {
             if(React.isValidElement(child)) {
               return (<Row><Col xs={child.props.xs} md={child.props.md}>{child}</Col></Row>);

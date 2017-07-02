@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'react-md-spinner';
-import { Panel, Modal, Button } from 'react-bootstrap';
+import { Panel, Modal, Button, Label } from 'react-bootstrap';
 import ProfileCard from './ProfileCard';
 import RowBuilder from './RowBuilder';
 import SearchBox from './SearchBox';
+import DropdownFilter from './DropdownFilter';
 import Error from './Error';
+import { getIndustries } from '../services/services';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -17,6 +19,7 @@ export default class ProfileCardContainer extends Component {
       loaded: false,
       error: false,
       profiles: [],
+      dropdown: {},
       term: '',
       showOverlay: false,
       activeProfile: null
@@ -126,14 +129,22 @@ export default class ProfileCardContainer extends Component {
         {
           (loaded && cardProfiles) &&
           <section>
-            <SearchBox
-              value={this.state.value}
-              onInputChange={this.onInputChange}
-              onFormSubmit={this.onFormSubmit}
-            />
-            <RowBuilder>
-              {cardProfiles}
-            </RowBuilder>
+            <div className="col-md-4">
+              <h4>Candidate Filters<span className="glyphicon glyphicon-filter"></span></h4>
+              <Panel>
+                <SearchBox
+                  value={this.state.value}
+                  onInputChange={this.onInputChange}
+                  onFormSubmit={this.onFormSubmit}
+                />
+                <DropdownFilter id={"industry_filter"} provider={getIndustries} title={"Industry"} />
+              </Panel>
+            </div>
+            <div className="col-md-8">
+              <RowBuilder>
+                {cardProfiles}
+              </RowBuilder>
+            </div>
           </section>
         }
         {
@@ -145,6 +156,8 @@ export default class ProfileCardContainer extends Component {
             <Modal.Body>
               <h3>{`${activeProfile.employment.jobTitle}, ${activeProfile.employment.company}`}</h3>
               <h4>{activeProfile.employment.industry}</h4>
+              <label>Role</label>
+              <p>{activeProfile.employment.roleDescription}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.closeModal}>Close</Button>

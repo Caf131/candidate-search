@@ -24,6 +24,8 @@ export default class SearchBox extends Component {
     e.preventDefault();
     const { value } = this.state;
     this.props.onFormSubmit(e, value);
+
+    // hit fetch, return results, pass them to the onResults handler
   }
 
   render() {
@@ -51,6 +53,7 @@ export default class SearchBox extends Component {
 SearchBox.PropTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onResults: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
   placeHolder: PropTypes.string
 }

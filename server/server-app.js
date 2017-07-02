@@ -23,9 +23,19 @@ Client.openConnection(connectionString)
     var services = Services(db);
 
     app.get('/profiles', function (req, res) {
-      services.getAllProfiles(200)
+      services.getAllProfiles(20)
         .then(function (docs) {
           res.json(docs);
+        });
+    });
+
+    app.get('/industries', function (req, res) {
+      services.getIndustries()
+        .then(function (docs) {
+          res.json(docs);
+        })
+        .catch(function (ex){
+          res.json('sawwwry ', ex);
         });
     });
 

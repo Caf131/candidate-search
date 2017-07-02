@@ -61,7 +61,7 @@ module.exports = {
     port: 9000,
     hot: true,
     proxy: {
-      "/profiles": "http://localhost:3000"
+      "/**": "http://localhost:3000"
     }
   }
 }

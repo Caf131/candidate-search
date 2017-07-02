@@ -1,0 +1,13 @@
+section {
+  &.drop-down-filter {
+    span {
+      &.selected-item {
+        margin-left: 10px;
+      }
+
+      &.remove-selected {
+        cursor: pointer;
+      }
+    }
+  }
+}

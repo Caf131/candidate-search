@@ -14,17 +14,17 @@ export default class ImageFallBack extends Component {
     if(this.props.url) {
       fetch(this.props.url)
         .then((response) => {
-          console.log('response => ', response);
+          // console.log('response => ', response);
           if(response.status >= 400) {
-            console.log('failed statusCode!')
+            // console.log('failed statusCode!')
             this.setState({ failed: true })
           }
         })
         .then((data) => {
-          console.log('image loaded');
+          // console.log('image loaded');
         })
         .catch((ex) => {
-          console.log('exception => ', ex);
+          // console.log('exception => ', ex);
         });
     } else {
       this.setState({ failed: true })
