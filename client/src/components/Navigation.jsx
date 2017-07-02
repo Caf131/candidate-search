@@ -11,7 +11,7 @@ export default class Navigation extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Respondent.io</a>
+            <a href="#">Navigation</a>
           </Navbar.Brand>
         </Navbar.Header>
       </Navbar>
