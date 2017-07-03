@@ -7,7 +7,13 @@ import RowBuilder from './RowBuilder';
 import SearchBox from './SearchBox';
 import DropdownFilter from './DropdownFilter';
 import Error from './Error';
-import { getIndustries, getLocations, getSeniorityLevels } from '../services/services';
+import {
+  getIndustries,
+  getLocations,
+  getSeniorityLevels,
+  getProfileSnap
+} from '../services/services';
+import { getImageUrl } from '../utils';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -34,14 +40,7 @@ export default class ProfileCardContainer extends Component {
   componentDidMount() {
     // loading
     this.setState({ loading: true, error: false, loaded: false });
-    fetch('/profiles')
-      .then((response) => {
-        if(response.statusCode >= 400) {
-          this.setState({ loading: false, error: true, loaded: false });
-        }
-        console.log('response => ', response);
-        return response.json();
-      })
+    getProfileSnap(50)
       .then((data) => {
         console.log('data => ', data);
         this.setState({
@@ -56,7 +55,7 @@ export default class ProfileCardContainer extends Component {
   btnViewProfileClick (profileIndex) {
     // select the target profile
     const activeProfile = this.state.profiles[profileIndex];
-    console.log('activeProfile => ', activeProfile);
+    // here fetch the rest of the data
     this.setState({
       activeProfile,
       showModal: true
@@ -91,19 +90,14 @@ export default class ProfileCardContainer extends Component {
     } = this.state;
 
     const cardProfiles = profiles.map((profile, idx) => {
-      const hasSocial = profile.social;
-
-      const imageUrl = hasSocial ? profile.social.facebook ?
-      profile.social.facebook.profile.picture.data.url : profile.social.linkedin ?
-      profile.social.linkedin.profile.pictureUrl : "" : "";
-
       return <ProfileCard
         key={profile._id}
         firstName={profile.firstName}
         lastName={profile.lastName}
         email={profile.email || profile.emailAddress}
-        location={profile.location}
-        imageUrl={imageUrl}
+        imageUrl={getImageUrl(profile)}
+        employmentStatus={profile.employment.employmentStatus}
+        profile={profile}
       >
         <Button
           onClick={this.btnViewProfileClick.bind(null, idx)}
@@ -131,16 +125,14 @@ export default class ProfileCardContainer extends Component {
           <section>
             <div className="col-md-4">
               <h4>Candidate Filters<span className="glyphicon glyphicon-filter"></span></h4>
-              <Panel>
-                <SearchBox
-                  value={this.state.value}
-                  onInputChange={this.onInputChange}
-                  onFormSubmit={this.onFormSubmit}
-                />
-                <DropdownFilter id={"industry_filter"} provider={getIndustries} title={"Industry"} />
-                <DropdownFilter id={"location_filter"} provider={getLocations} title={"Locations"} />
-                <DropdownFilter id={"seniority_filter"} provider={getSeniorityLevels} title={"Seniority Level"} />
-              </Panel>
+              <SearchBox
+                value={this.state.value}
+                onInputChange={this.onInputChange}
+                onFormSubmit={this.onFormSubmit}
+              />
+              <DropdownFilter id={"industry_filter"} provider={getIndustries} title={"Industry"} />
+              <DropdownFilter id={"location_filter"} provider={getLocations} title={"Locations"} />
+              <DropdownFilter id={"seniority_filter"} provider={getSeniorityLevels} title={"Seniority Level"} />
             </div>
             <div className="col-md-8">
               <RowBuilder>

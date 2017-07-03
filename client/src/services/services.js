@@ -33,9 +33,20 @@ const getSeniorityLevels = () => {
     .then((data) => Promise.resolve(data))
 }
 
+const getProfileSnap = (limit) => {
+  return fetch(`/profileSnap/${limit}`)
+    .then((response) => {
+      if(response.status >= 400) {
+        Promise.reject();
+      }
+      return response.json();
+    })
+    .then((data) => Promise.resolve(data))
+}
 
 export {
   getIndustries,
   getLocations,
-  getSeniorityLevels
+  getSeniorityLevels,
+  getProfileSnap
 }

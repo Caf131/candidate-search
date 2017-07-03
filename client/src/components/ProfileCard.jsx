@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Label, Panel, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import Location from './Location';
 import ImageFallBack from './ImageFallBack';
-import baseStyles from '../BaseStyles.scss';
 import styles from './ProfileCard.scss';
 import fallbackImage from '../assets/fallback-person-image.jpg';
 
@@ -12,7 +12,14 @@ export default class ProfileCard extends Component {
   }
 
   render() {
-    const { firstName, lastName, email, location, status, imageUrl } = this.props;
+    const {
+      firstName,
+      lastName,
+      email,
+      employmentStatus,
+      imageUrl,
+      profile
+    } = this.props;
 
     return (
       <section>
@@ -26,12 +33,11 @@ export default class ProfileCard extends Component {
           />
           <ListGroup>
             <ListGroupItem>
-              <Label>Location:</Label>
-              <div>{`${location.city}, ${location.state}`}</div>
+              <Location profile={profile} />
             </ListGroupItem>
             <ListGroupItem>
               <Label>Status:</Label>
-              <div>{status}</div>
+              <div className="text-overflow-ellipsis">{employmentStatus}</div>
             </ListGroupItem>
             <ListGroupItem className="email">
               <Label>Email:</Label>
@@ -50,6 +56,7 @@ ProfileCard.PropTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   location: PropTypes.string,
+  employmentStatus: PropTypes.string,
   email: PropTypes.string,
   children: PropTypes.node
 };

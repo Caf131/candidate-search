@@ -27,6 +27,13 @@ Client.openConnection(connectionString)
         });
     });
 
+    app.get('/profileSnap/:limit', function (req, res) {
+      services.getProfileSnap(parseInt(req.params.limit, 10))
+        .then(function (docs) {
+          res.json(docs);
+        });
+    });
+
     app.get('/industries', function (req, res) {
       services.getIndustries()
         .then(function (docs) {
