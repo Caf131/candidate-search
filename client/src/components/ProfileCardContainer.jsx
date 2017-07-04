@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'react-md-spinner';
-import { Panel, Modal, Button, Label } from 'react-bootstrap';
+import { Panel, Button, Label } from 'react-bootstrap';
 import ProfileCard from './ProfileCard';
+import ProfileDetail from './ProfileDetail';
 import RowBuilder from './RowBuilder';
 import SearchBox from './SearchBox';
 import DropdownFilter from './DropdownFilter';
@@ -42,7 +43,6 @@ export default class ProfileCardContainer extends Component {
     this.setState({ loading: true, error: false, loaded: false });
     getProfileSnap(50)
       .then((data) => {
-        console.log('data => ', data);
         this.setState({
           loading: false,
           error: false,
@@ -123,7 +123,7 @@ export default class ProfileCardContainer extends Component {
         {
           (loaded && cardProfiles) &&
           <section>
-            <div className="col-md-4">
+            <div className="col-md-2">
               <h4>Candidate Filters<span className="glyphicon glyphicon-filter"></span></h4>
               <SearchBox
                 value={this.state.value}
@@ -134,7 +134,7 @@ export default class ProfileCardContainer extends Component {
               <DropdownFilter id={"location_filter"} provider={getLocations} title={"Locations"} />
               <DropdownFilter id={"seniority_filter"} provider={getSeniorityLevels} title={"Seniority Level"} />
             </div>
-            <div className="col-md-8">
+            <div className="col-md-10">
               <RowBuilder>
                 {cardProfiles}
               </RowBuilder>
@@ -143,20 +143,7 @@ export default class ProfileCardContainer extends Component {
         }
         {
           (showModal && activeProfile) &&
-          <Modal show={showModal} onHide={this.closeModal} bsSize="large">
-            <Modal.Header closeButton>
-              <Modal.Title>{`${activeProfile.firstName} ${activeProfile.lastName}`}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h3>{`${activeProfile.employment.jobTitle}, ${activeProfile.employment.company}`}</h3>
-              <h4>{activeProfile.employment.industry}</h4>
-              <label>Role</label>
-              <p>{activeProfile.employment.roleDescription}</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.closeModal}>Close</Button>
-            </Modal.Footer>
-          </Modal>
+          <ProfileDetail showModal activeProfile={activeProfile} />
         }
       </div>
     );

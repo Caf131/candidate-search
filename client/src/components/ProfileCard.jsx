@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Label, Panel, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import Location from './Location';
+import Email from './Email';
 import ImageFallBack from './ImageFallBack';
 import styles from './ProfileCard.scss';
 import fallbackImage from '../assets/fallback-person-image.jpg';
@@ -30,6 +31,7 @@ export default class ProfileCard extends Component {
           <ImageFallBack
             url={imageUrl}
             fallBackUrl={fallbackImage}
+            className="profile-image"
           />
           <ListGroup>
             <ListGroupItem>
@@ -40,8 +42,7 @@ export default class ProfileCard extends Component {
               <div className="text-overflow-ellipsis">{employmentStatus}</div>
             </ListGroupItem>
             <ListGroupItem className="email">
-              <Label>Email:</Label>
-              <div className="email text-overflow-ellipsis">{email}</div>
+              <Email email={email} />
             </ListGroupItem>
           </ListGroup>
           {this.props.children}

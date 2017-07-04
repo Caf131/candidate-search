@@ -6,7 +6,7 @@ module.exports = function (client) {
       var deferred = Q.defer();
 
       client.collection('profiles')
-        .find({ "location": { $ne: null } }, { firstName: 1, lastName: 1, email: 1, location: 1, social: 1, employment: 1 })
+        .find({ "location": { $ne: null } })
         .limit(limit)
         .toArray(function (err, docs){
           if(err) {
@@ -18,20 +18,6 @@ module.exports = function (client) {
 
       return deferred.promise;
     }
-
-    var getAllProfiles = function (limit) {
-      var deferred = Q.defer();
-
-      client.collection('profiles').find({}).limit(limit).toArray(function (err, docs){
-        if(err) {
-          deferred.reject(err);
-        } else {
-          deferred.resolve(docs);
-        };
-      });
-
-      return deferred.promise;
-    };
 
     var getIndustries = function () {
       var deferred = Q.defer();
@@ -76,7 +62,6 @@ module.exports = function (client) {
     }
 
     return {
-      getAllProfiles: getAllProfiles,
       getIndustries: getIndustries,
       getLocations: getLocations,
       getSeniorityLevels: getSeniorityLevels,

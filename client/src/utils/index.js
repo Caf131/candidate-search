@@ -1,10 +1,21 @@
 import get from 'lodash/get';
 
 export function capitalizeFirst (word) {
-  const end = word.slice(1, word.length);
-  const firstLetter = word.charAt(0).toUpperCase();
-  console.log('word => ', `${firstLetter}${end}`);
-  return `${firstLetter}${end}`;
+  const splitString = word.split(' ');
+  let result = '';
+
+  splitString.forEach((word) => {
+    const end = word.slice(1, word.length).toLowerCase();
+    const firstLetter = word.charAt(0).toUpperCase();
+    const value = `${firstLetter}${end}`;
+    result += value + ' ';
+  });
+
+  return result.trim();
+}
+
+export function formatState (word) {
+  return word.length === 2 ? word.toUpperCase() : capitalizeFirst(word);
 }
 
 function getLocationFromLinkedIn(profile) {
@@ -34,7 +45,7 @@ export function getLocationFromProfile(profile) {
 
   if(shouldGetLocationFromCityObject) {
     const { city, state } = profile.location.city;
-    formattedLocation = `${capitalizeFirst(city)}, ${state.toUpperCase()}`;
+    formattedLocation = `${capitalizeFirst(city)}, ${formatState(state)}`;
   }
 
   if (hasTopLevelCity) {
@@ -61,7 +72,7 @@ export function getLocationFromProfile(profile) {
   if(formattedLocation) {
     return formattedLocation;
   } else {
-    formattedLocation = `${city.toUpperCase()}, ${state.toUpperCase()}`;
+    formattedLocation = `${capitalizeFirst(city)}, ${state.toUpperCase()}`;
   }
 
   return formattedLocation;

@@ -33,16 +33,19 @@ export default class ImageFallBack extends Component {
   }
 
   render() {
+    const { className } = this.props;
+
     return <Image
       src={this.state.failed ? this.props.fallBackUrl : this.props.url}
       responsive
       circle
-      className="center-block"
+      className={`center-block ${className}`}
     />;
   }
 }
 
 ImageFallBack.PropTypes = {
   url: PropTypes.string.isRequired,
-  fallBackUrl: PropTypes.string.isRequired
+  fallBackUrl: PropTypes.string.isRequired,
+  className: PropTypes.string
 };
